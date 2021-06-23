@@ -1,12 +1,31 @@
-\version "2.20.0"
+#(set-global-staff-size 19)
+
+\version "2.19.83"
 
 \paper {
+    #(set-paper-size "letter")
+    #(define fonts
+        (set-global-fonts
+            #:music "haydn"
+            #:brace "haydn"
+            #:roman "Old Standard TT"
+            #:sans "sans-serif"
+            #:typewriter "monospace"
+            #:factor (/ staff-height pt 20)
+    ))
+    top-margin = 0.625\in
+    bottom-margin = 0.625\in
+    left-margin = 0.625\in
+    right-margin = 0.625\in
     indent = 0.75 \in
+    ragged-last-bottom = ##f
+    footnote-separator-markup = ##f
+    tagline = ##f
 }
 
 \header {
-    title = \markup { \normal-text "? Variations" }
-    subtitle = \markup { \normal-text "on God Save the King" }
+    title = \markup { \normal-text "4 Variations" }
+    subtitle = \markup { \normal-text "on God Save the King / My Country, 'Tis of Thee" }
     instrument = \markup { \normal-text "for violin" }
     composer = "J.C. Bach"
     arranger = "arr. Thomas Foster"
@@ -24,7 +43,7 @@ theme = \relative c'' {
 }
 
 var_skipping = \relative c' {
-    d8^"Var. ?" \appoggiatura{e'8} d16[ cis] d8 a' fis e
+    d8^"Var. 1" \appoggiatura{e'8} d16[ cis] d8 a' fis e
     d8 cis16 b cis8 d e cis
     d, \appoggiatura{g'8} fis16[ e] fis8 a b g16 e
     a8 fis16 d g8 e16 cis d8 fis16 d
@@ -41,7 +60,7 @@ var_skipping = \relative c' {
 }
 
 var_running = \relative c' {
-    r16^"Var. ?" d16 fis a d a fis' d a' fis e d
+    r16^"Var. 2" d16 fis a d a fis' d a' fis e d
     cis a a a cis a d a e' a, cis a
     fis' a, d fis a fis e\trill d b' g fis\trill e
     a fis e\trill d g e d\trill cis d fis e\trill d
@@ -58,34 +77,46 @@ var_running = \relative c' {
 }
 
 var_leaping = \relative c' {
-    d8_\markup{\italic staccato}^"Var. ?" d' fis, d' g, e'
+    d8_\markup{\italic staccato}^"Var. 3" d' fis, d' g, e'
     a,, cis' b, d' cis, e'
     d, fis' d fis g, g'
     a, fis' a,, e'' b, d'
     g,, e'' a,, d' a, cis'
     d, d' d, a' d, fis
+    
     a' d,, a'' fis, a' a,
-    a' d, g e fis d
+    a'( d,) g( e) fis( d)
     g a,, g'' cis,, g'' e,
-    g' a, fis' a, e' a,
-    a, fis'' g fis e d
+    g'( a,) fis'( a,) e'( a,)
+    a, fis''( g fis e d)
     d, fis' e, g' fis, a'
     g, g' a, fis' a,, e''
-    d, d' fis, a d4 \bar"||"
+    d, d' fis a d4 \bar"||"
 }
 
 var_flowing = \relative c' {
-    \times 2/3{d8( fis a)} \times 2/3{d( a fis)} \times 2/3{e'( b g)}
+    \times 2/3{d8(^"Var. 4" fis a)} \times 2/3{d( a fis)} \times 2/3{e'( b g)}
     \times 2/3{a,( cis e)} \times 2/3{cis'( a d)} \times 2/3{ e( cis e)}
     \times 2/3{d,( fis a)} \times 2/3{fis'( d a)} \times 2/3{g'( e b)}
     \times 2/3{fis'( g fis)} \times 2/3{e( fis e)} \times 2/3{d( e d)}
     \times 2/3{e( g) e-.} \times 2/3{d( fis) d-.} \times 2/3{cis(\trill b cis)}
     \times 2/3{d fis, a} \times 2/3{d a d} \times 2/3{fis d fis}
+    
     \repeat unfold 3 { \times 2/3{a( fis d)} }
     \times 2/3{a'( b a)} \times 2/3{g( a g)} \times 2/3{fis( g fis)}
     \repeat unfold 3 { \times 2/3{g( e a,)} }
     \times 2/3{g'( a g)} \times 2/3{fis( g fis)} \times 2/3{e( fis e)}
-    d4 \times 2/3{g8( a fis)} \times 2/3{ e( fis d)}
+    d8-! d,-! \times 2/3{g'8( a fis)} \times 2/3{ e( fis d)}
+    \times 2/3{d( cis d)} \times 2/3{e( d e)} \times 2/3{fis( g a)}
+    g4( fis e)
+    
+    % code
+    \times 2/3{d8( fis e)} \times 2/3{d( e fis)} \times 2/3{fis( g a)}
+    \times 2/3{b( a g)} fis4 e\trill
+    \times 2/3{fis8( d fis)} \times 2/3{a( fis a)} \times 2/3{d( a fis)}
+    \times 2/3{b( a g)} \times 2/3{fis( g a)} \times 2/3{g( fis e)}
+    \times 2/3{d( a fis)} \times 2/3{d d d} \times 2/3{d d d}
+    d4 r r \bar"|."
 }
 
 violin = \relative c'' {
